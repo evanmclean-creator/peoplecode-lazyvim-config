@@ -1,0 +1,237 @@
+{
+  "If / End-If": {
+    "prefix": "if",
+    "body": [
+      "If ${1:condition} Then",
+      "\t$0",
+      "End-If;"
+    ],
+    "description": "If ... Then ... End-If"
+  },
+  "If / Else / End-If": {
+    "prefix": "ifelse",
+    "body": [
+      "If ${1:condition} Then",
+      "\t${2}",
+      "Else",
+      "\t$0",
+      "End-If;"
+    ],
+    "description": "If ... Then ... Else ... End-If"
+  },
+  "For / End-For": {
+    "prefix": "for",
+    "body": [
+      "For ${1:&i} = ${2:1} To ${3:&count}",
+      "\t$0",
+      "End-For;"
+    ],
+    "description": "For ... To ... End-For"
+  },
+  "For Step / End-For": {
+    "prefix": "forstep",
+    "body": [
+      "For ${1:&i} = ${2:1} To ${3:&count} Step ${4:1}",
+      "\t$0",
+      "End-For;"
+    ],
+    "description": "For ... To ... Step ... End-For"
+  },
+  "While / End-While": {
+    "prefix": "while",
+    "body": [
+      "While ${1:condition}",
+      "\t$0",
+      "End-While;"
+    ],
+    "description": "While ... End-While"
+  },
+  "Repeat / Until": {
+    "prefix": "repeat",
+    "body": [
+      "Repeat",
+      "\t$0",
+      "Until ${1:condition};"
+    ],
+    "description": "Repeat ... Until"
+  },
+  "Evaluate / When / End-Evaluate": {
+    "prefix": "evaluate",
+    "body": [
+      "Evaluate ${1:&value}",
+      "When ${2:\"value1\"}",
+      "\t${3}",
+      "\tBreak;",
+      "When-Other",
+      "\t$0",
+      "\tBreak;",
+      "End-Evaluate;"
+    ],
+    "description": "Evaluate ... When ... When-Other ... End-Evaluate"
+  },
+  "When clause": {
+    "prefix": "when",
+    "body": [
+      "When ${1:\"value\"}",
+      "\t$0",
+      "\tBreak;"
+    ],
+    "description": "When ... Break;"
+  },
+  "Try / Catch / End-Try": {
+    "prefix": "try",
+    "body": [
+      "Try",
+      "\t${1}",
+      "Catch Exception ${2:&ex}",
+      "\t$0",
+      "End-Try;"
+    ],
+    "description": "Try ... Catch ... End-Try"
+  },
+  "Function / End-Function": {
+    "prefix": "function",
+    "body": [
+      "Function ${1:Name}(${2:&param As string}) Returns ${3:string}",
+      "\t$0",
+      "End-Function;"
+    ],
+    "description": "Function ... Returns ... End-Function"
+  },
+  "Function (no return)": {
+    "prefix": "functionv",
+    "body": [
+      "Function ${1:Name}(${2:&param As string})",
+      "\t$0",
+      "End-Function;"
+    ],
+    "description": "Function ... End-Function (no return value)"
+  },
+  "Method / End-Method": {
+    "prefix": "method",
+    "body": [
+      "method ${1:Name}",
+      "\t/+ ${2:&param as string} +/",
+      "\t$0",
+      "end-method;"
+    ],
+    "description": "method ... end-method (with signature annotation)"
+  },
+  "Get property accessor": {
+    "prefix": "get",
+    "body": [
+      "get ${1:PropName}",
+      "\t/+ Returns ${2:string} +/",
+      "\t$0",
+      "end-get;"
+    ],
+    "description": "get ... end-get"
+  },
+  "Set property accessor": {
+    "prefix": "set",
+    "body": [
+      "set ${1:PropName}",
+      "\t/+ ${2:&value as string} +/",
+      "\t$0",
+      "end-set;"
+    ],
+    "description": "set ... end-set"
+  },
+  "Interface declaration": {
+    "prefix": "interface",
+    "body": [
+      "interface ${1:Name}",
+      "\t$0",
+      "end-interface;"
+    ],
+    "description": "interface ... end-interface"
+  },
+  "Local variable": {
+    "prefix": "local",
+    "body": [
+      "Local ${1:string} &${2:name};$0"
+    ],
+    "description": "Local <type> &name;"
+  },
+  "Local with assignment": {
+    "prefix": "locala",
+    "body": [
+      "Local ${1:string} &${2:name} = ${3:value};$0"
+    ],
+    "description": "Local <type> &name = value;"
+  },
+  "Component variable": {
+    "prefix": "component",
+    "body": [
+      "Component ${1:string} &${2:name};$0"
+    ],
+    "description": "Component <type> &name;"
+  },
+  "Global variable": {
+    "prefix": "global",
+    "body": [
+      "Global ${1:string} &${2:name};$0"
+    ],
+    "description": "Global <type> &name;"
+  },
+  "SQLExec": {
+    "prefix": "sqlexec",
+    "body": [
+      "SQLExec(\"${1:SELECT }\", ${2:&bind}, ${3:&out});$0"
+    ],
+    "description": "SQLExec(sql, binds..., outputs...)"
+  },
+  "GetSQL / Fetch loop": {
+    "prefix": "getsql",
+    "body": [
+      "&${1:sql} = GetSQL(SQL.${2:SQL_NAME}${3:, &bind});",
+      "&${1:sql}.ReuseCursor = True;",
+      "While &${1:sql}.Fetch(${4:&out})",
+      "\t$0",
+      "End-While;",
+      "&${1:sql}.Close();"
+    ],
+    "description": "GetSQL + ReuseCursor + Fetch loop + Close"
+  },
+  "CreateRecord": {
+    "prefix": "createrecord",
+    "body": [
+      "Local Record &${1:rec} = CreateRecord(Record.${2:RECNAME});$0"
+    ],
+    "description": "Local Record = CreateRecord(Record.X)"
+  },
+  "MessageBox": {
+    "prefix": "messagebox",
+    "body": [
+      "MessageBox(0, \"\", 0, 0, \"${1:message}\"${2:, &bind});$0"
+    ],
+    "description": "MessageBox(style, title, msgset, msgnum, text, binds...)"
+  },
+  "Class": {
+    "prefix": "class",
+    "body": [
+      "class ${1:Name}",
+      "\t$0",
+      "end-class;"
+    ],
+    "description": "class ... end-class (bare)"
+  },
+  "Class (extends)": {
+    "prefix": "classe",
+    "body": [
+      "class ${1:Name} extends ${2:PKG:Base}",
+      "\t$0",
+      "end-class;"
+    ],
+    "description": "class ... extends ... end-class"
+  },
+  "Class (implements)": {
+    "prefix": "classi",
+    "body": [
+      "class ${1:Name} implements ${2:PKG:IInterface}",
+      "\t$0",
+      "end-class;"
+    ],
+    "description": "class ... implements ... end-class"
+  }
+}
