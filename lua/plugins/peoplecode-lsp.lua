@@ -12,7 +12,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     ft = "peoplecode",
-    config = function()
+    init = function()
       local PCLS_DLL = vim.fn.expand("~/.local/share/pcls/pcls.dll")
 
       local grp = vim.api.nvim_create_augroup("PcLsp", { clear = true })
